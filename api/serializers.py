@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import permissions
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.db.models import Q
+
 
 # class LibraryMemberSerializer(serializers.ModelSerializer):
 #     password = serializers.CharField(write_only=True)
@@ -19,6 +21,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 #             instance.set_password(password)
 #         instance.save()
 #         return instance
+
 class LibraryMemberSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -154,7 +157,26 @@ class UserSerializer(serializers.ModelSerializer):
         return RenewalSerializer(renewals, many=True).data
 
 
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_staff']
+
+
+
+
+
+
+
+# Search
+
+class BookSearchSerializer(serializers.Serializer):
+    query = serializers.CharField()
+
+# class BookSearchSerializer(serializers.Serializer):
+#     query = serializers.CharField()
+#     def search(self):
+#         query = self.validated_data['query']
+#         books = Book.objects.filter(
+#             Q(title__icontains=query) |
+#             Q(author__icontains=query) |
+#             Q(ISBN__icontains=query)
+#         )
+        
+#         return BookSerializer(books, many=True).data

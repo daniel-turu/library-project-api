@@ -12,7 +12,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView
-
+from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -75,9 +75,25 @@ class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BookSerializer
 
 
+# Search
 
+class BookSearchView(generics.ListAPIView):
+    serializer_class = BookSerializer
 
+    def get_queryset(self):
+        queryset = Book.objects.all()
+        search = self.request.query_params.get('search')
 
+        if search:
+            queryset = queryset.filter(
+                Q(title__icontains=search) |
+                Q(author__icontains=search) |
+                Q(ISBN__icontains=search) |
+                Q(id__icontains=search)
+            )
+
+        return queryset
+        
 
 
 class IssueListCreateAPIView(generics.ListCreateAPIView):

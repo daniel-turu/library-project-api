@@ -59,6 +59,3 @@ class Renewal(models.Model):
     due_date = models.DateField()
 
 
-
-
-
