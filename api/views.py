@@ -52,15 +52,15 @@ class UserList(generics.ListAPIView):
     serializer_class = UserListSerializer
 
 
-# Category
-class CategoryListCreateAPIView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsStaffUser]
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+# # Category
+# class CategoryListCreateAPIView(generics.ListCreateAPIView):
+#     permission_classes = [IsAuthenticated, IsStaffUser]
+#     queryset = Category.objects.all()
+#     serializer_class = CategorySerializer
 
-class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated, IsStaffUser]
-    serializer_class = CategorySerializer
+# class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     permission_classes = [IsAuthenticated, IsStaffUser]
+#     serializer_class = CategorySerializer
 
 
 # Book

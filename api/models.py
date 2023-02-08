@@ -2,9 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
-
+import base64
+from django.core.files.base import ContentFile
 
 # class NewUser(AbstractBaseUser, PermissionsMixin):
 #     username = models.CharField(max_length=150, unique=True)
@@ -15,22 +14,30 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 #     start_date = models.DateTimeField(default=timezone.now)
 
-class Category(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.TextField()
-    def __str__(self):
-        return self.name
+# class Category(models.Model):
+#     name = models.CharField(max_length=50)
+#     description = models.TextField()
+#     def __str__(self):
+#         return self.name
 
 class Book(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=13, unique=True)
     publication_date = models.DateField()
     number_of_copies = models.PositiveSmallIntegerField()
+    cover_picture=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None, null=True)
+    category = models.CharField(max_length=200, null=True)
+    # cover_picture = models.TextField(blank=True, null=True)
 
-
+    # def save_cover_picture(self, cover_picture):
+    #     if cover_picture:
+    #         image = base64.b64encode(cover_picture.read()).decode('utf-8')
+    #         self.cover_picture = 'data:image/png;base64,' + image
+    #         self.save()
+    #     return None
 
 class Issue(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)

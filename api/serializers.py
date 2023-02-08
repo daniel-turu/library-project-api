@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate
 from rest_framework import permissions
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.db.models import Q
-
+import base64
+from django.core.files.base import ContentFile
 
 # class LibraryMemberSerializer(serializers.ModelSerializer):
 #     password = serializers.CharField(write_only=True)
@@ -72,14 +73,14 @@ class UserListSerializer(serializers.ModelSerializer):
 
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'name', 'description']
+# class CategorySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Category
+#         fields = ['id', 'name', 'description']
 
 
 class BookSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    # category = CategorySerializer()
     class Meta:
         model = Book
         fields = '__all__'
@@ -88,8 +89,17 @@ class IssueSerializer(serializers.ModelSerializer):
     book = BookSerializer()
 
     class Meta:
-        model = Issue
+        model = Book
         fields = '__all__'
+
+    # def to_representation(self, instance):
+    #     representation = super().to_representation(instance)
+
+    #     if instance.cover_picture:
+    #         format, imgstr = instance.cover_picture.split(';base64,')
+    #         ext = format.split('/')[-1]
+    #         representation['cover_ picture'] = ContentFile(base64.b64decode(imgstr), name='cover_picture.' + ext)
+    #     return representation
     
 
 class ReturnSerializer(serializers.ModelSerializer):
