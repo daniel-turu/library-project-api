@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
+    'corsheaders',
     "rest_framework",
     'rest_framework_simplejwt.token_blacklist',
 
@@ -157,6 +158,9 @@ REST_FRAMEWORK = {
 # IsAdminUser
 # IsAuthenticatedOrReadOnly
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=12),
