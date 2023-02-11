@@ -28,7 +28,7 @@ class Book(models.Model):
     ISBN = models.CharField(max_length=13, unique=True)
     publication_date = models.DateField()
     number_of_copies = models.PositiveSmallIntegerField()
-    cover_picture=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None, null=True)
+    # cover_picture=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None, null=True)
     category = models.CharField(max_length=200, null=True)
 
 

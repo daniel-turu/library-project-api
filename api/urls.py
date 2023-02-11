@@ -15,7 +15,8 @@ urlpatterns = [
     # path('categories/<int:pk>/', CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-update'),
    
    # Books
-    path('books/', BookListCreateAPIView.as_view(), name='book-create'),
+    path('books/', BookListAPIView.as_view(), name='book-list'),
+    path('books/add/', BookCreateAPIView.as_view(), name='book-create'),
     path('books/<int:pk>/', BookRetrieveUpdateDestroyAPIView.as_view(), name='book-retrieve-update-delete'),
 
     # Search

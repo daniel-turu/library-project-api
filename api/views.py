@@ -6,6 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.views.generic import ListView, CreateView
 
 
 
@@ -60,7 +61,12 @@ class UserDestroyAPIView(generics.DestroyAPIView):
 
 
 # Book
-class BookListCreateAPIView(generics.ListCreateAPIView):
+
+class BookListAPIView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    
+class BookCreateAPIView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated, IsStaffUser]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
