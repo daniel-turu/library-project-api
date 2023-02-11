@@ -1,6 +1,4 @@
-
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from .views import *
 
 
@@ -11,7 +9,7 @@ urlpatterns = [
     path('library-members/', LibraryMemberCreateView.as_view(), name='library-member-create'),
     path('library-staff-members/', LibraryStaffMemberCreateView.as_view(), name='library-staff-member-create'),
     path('user_list/', UserList.as_view(), name='user_list'),
-
+    path('user/<int:pk>/', UserDestroyAPIView.as_view(), name='user-retrieve-update-delete'),
     # Category
     # path('categories/', CategoryListCreateAPIView.as_view(), name='category-list'),
     # path('categories/<int:pk>/', CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-update'),

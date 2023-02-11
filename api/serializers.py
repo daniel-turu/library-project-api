@@ -3,10 +3,8 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import permissions
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.db.models import Q
 import base64
-from django.core.files.base import ContentFile
 
 # class LibraryMemberSerializer(serializers.ModelSerializer):
 #     password = serializers.CharField(write_only=True)

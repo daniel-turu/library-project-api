@@ -30,14 +30,7 @@ class Book(models.Model):
     number_of_copies = models.PositiveSmallIntegerField()
     cover_picture=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None, null=True)
     category = models.CharField(max_length=200, null=True)
-    # cover_picture = models.TextField(blank=True, null=True)
 
-    # def save_cover_picture(self, cover_picture):
-    #     if cover_picture:
-    #         image = base64.b64encode(cover_picture.read()).decode('utf-8')
-    #         self.cover_picture = 'data:image/png;base64,' + image
-    #         self.save()
-    #     return None
 
 class Issue(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
